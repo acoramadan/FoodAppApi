@@ -24,6 +24,8 @@ Class User {
     public function userLogin() {
         $query = 'SELECT * FROM '.$this->table.' WHERE email = ? AND password = ? LIMIT 1';
         $stmt = $this->conn->prepare($query);
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->password = htmlspecialchars(strip_tags($this->password));
         $stmt->bindParam(1, $this->email);
         $stmt->bindParam(2, $this->password);
         $stmt->execute();
@@ -42,6 +44,33 @@ Class User {
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':password', $this->password);
         $stmt->bindParam(':phone_number', $this->phoneNumber);
+        if($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function updatePasswordByEmail() {
+        $query = 'UPDATE '.$this->table.' SET password = :password WHERE email = :email';
+        $stmt = $this->conn->prepare($query);
+        $this->email = htmlspecialchars(strip_tags($this->email));
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $stmt->bindParam(':email', $this->email);
+        $stmt->bindParam(':password', $this->password);
+        if($stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function updatePasswordById() {
+        $query = 'UPDATE '.$this->table.' SET password = :password WHERE id = :id';
+        $stmt = $this->conn->prepare($query);
+        $this->email = htmlspecialchars(strip_tags($this->id));
+        $this->password = htmlspecialchars(strip_tags($this->password));
+        $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':password', $this->password);
         if($stmt->execute()) {
             return true;
         } else {
