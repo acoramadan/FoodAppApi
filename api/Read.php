@@ -3,8 +3,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-include_once '../conf/Initialized.php';
-
 $user = new User($db);
 $result = $user->read();
 

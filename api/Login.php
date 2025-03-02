@@ -3,12 +3,31 @@ header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
-include_once '../conf/Initialized.php';
-include_once '../utils/Token.php';
-include_once '../utils/Encrypt.php';
 
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
+
+if (!isset($data->email) || !isset($data->password)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Login Failed, Data is Empty',
+            'status' => 404
+        )
+    );
+    return;
+}
+
+if (isEmptyLogin($data->email, $data->password)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Login Failed, Data is Empty',
+            'status' => 404
+        )
+    );
+    return;
+}
 $user->setEmail($data->email);
 $user->setPassword($data->password);
 
@@ -32,9 +51,9 @@ if($user->userLogin() != null) {
 } else {
     echo json_encode(
         array(
-            'message' => 'No User Found',
-            'status' => 404,
             'error' => true,
+            'message' => 'No User Found',
+            'status' => 404
             )
     );
 }

@@ -4,11 +4,30 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-include_once '../conf/Initialized.php';
-include_once '../utils/Token.php';
-
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
+
+if(!isset($data->email) || !isset($data->username) || !isset($data->password) || !isset($data->phoneNumber)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Register Failed, Data is Empty',
+            'status' => 404
+        )
+    );
+    return;
+}
+
+if(isEmptyRegister($data->email, $data->username, $data->password, $data->phoneNumber)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Register Failed, Data is Empty',
+            'status' => 404
+        )
+    );
+    return;
+}
 $user->setEmail($data->email);
 $user->setPassword($data->password);
 $user->setUserName($data->username);
@@ -27,9 +46,9 @@ if ($user->createUser()) {
 } else {
     echo json_encode(
         array(
-            'message' => 'Register Failed',
-            'status' => 404,
             'error' => true,
+            'message' => 'Register Failed',
+            'status' => 404
         )
     );
 }

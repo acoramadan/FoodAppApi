@@ -4,13 +4,13 @@ Class User {
     private $conn;
     private $table = 'user';
 
-    public $id;
-    public $userName;
-    public $email;
-    public $password;
-    public $phoneNumber;
-    public $createdAt;
-    public $modified;
+    private $id;
+    private $userName;
+    private $email;
+    private $password;
+    private $phoneNumber;
+    private $createdAt;
+    private $modified;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -104,5 +104,23 @@ Class User {
     }
     public function setModified($modified) {
         $this->modified = $modified;
+    }
+    public function getModified() {
+        return $this->modified;
+    }
+    public function getCreatedAt() {
+        return $this->createdAt;
+    }
+    public function getPhoneNumber() {
+        return $this->phoneNumber;
+    }
+    public function getEmail() {
+        return $this->email;
+    }
+    public function getPassword() {
+        return $this->password;
+    }
+    public function getUserName() {
+        return $this->userName;
     }
 }

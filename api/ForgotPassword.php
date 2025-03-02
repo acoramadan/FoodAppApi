@@ -4,12 +4,34 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Access-Control-Allow-Headers, Content-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
-include_once '../conf/Initialized.php';
-
 $user = new User($db);
 $data = json_decode(file_get_contents("php://input"));
+
+if(!isset($data->email) || !isset($data->password)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Change Password Failed, Data is Empty',
+            'status' => 404,
+        )
+    );
+    return;
+}
+
+if(isEmptyPasswordAndEmail($data->email, $data->password)) {
+    echo json_encode(
+        array(
+            'error' => true,
+            'message' => 'Change Password Failed, Data is Empty',
+            'status' => 404,
+        )
+    );
+    return;
+}
+
 $user->setEmail($data->email);
 $user->setPassword($data->password);
+
 
 if($user->updatePasswordByEmail()) {
     $user_arr = array();
@@ -24,9 +46,9 @@ if($user->updatePasswordByEmail()) {
 } else {
     echo json_encode(
         array(
+            'error' => true,
             'message' => 'Password Update Failed',
             'status' => 404,
-            'error' => true,
         )
     );
 }

@@ -2,7 +2,6 @@
 header('Access-Control-Allow-Origin: *');
 header('Content-Type: application/json');
 
-include_once '../conf/Initialized.php';
 
 $user = new User($db);
 
@@ -14,7 +13,7 @@ if(!empty($result)) {
     $user_arr['data'] = array();
     $user_item = array (
         "error" => false,
-        "message" => "Login Success",   
+        "message" => "Profile retrieved successfully",   
         "status" => 200,
         "user" => (object) [
             "username" => $result['user_name'],
@@ -27,9 +26,9 @@ if(!empty($result)) {
 } else {
     echo json_encode(
         [
+            'error' => true,
             'message' => 'No User Found',
-            'status' => 404,
-            'error' => true
+            'status' => 404
         ]
     );
 }

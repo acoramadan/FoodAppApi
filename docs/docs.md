@@ -1,5 +1,5 @@
 # SIMPLE CRUD API FOR FOODAPP
-This repo its only for my side project that im currently working on. And trying to make an crud API
+This repo its only for my side project that im currently working on
 
 # API Documentation
 
@@ -10,7 +10,7 @@ This documentation provides a comprehensive guide on how to use the API for user
 ## Base URL
 
 All API requests should be made to the following base URL:
-127.0.0.1/FoodApp/api/v1
+http://foodapi.mooo.com/FoodApp/api/
 
 ---
 
@@ -71,7 +71,72 @@ Authenticate a user and retrieve a token.
     "status": 400
 }
 ```
-### 2. Get user Profile
+
+### 2. Register
+
+Authenticate a user and retrieve a token.
+
+**URL:** `/register`
+
+**Method:** `POST`
+
+#### Request
+
+**Headers:**
+- `Content-Type: application/json`
+
+**Body:**
+```json
+{
+    "username":"fulan123",
+    "email": "user@gmail.com",
+    "password": "password123",
+    "phoneNumber":"089698100654"
+}
+```
+**Success Respons:**
+```json
+{
+    "data": [
+        {
+            "error": false,
+            "message": "Register Success",
+            "status": 200,
+        }
+    ]
+}
+```
+**Failed Respons:**
+- `Missing input fields`
+
+```json
+{
+    "data": [
+        {
+            "error": true,
+            "message": "Register Failed, Data is Empty",
+            "status": 404,
+        }
+    ]
+}
+```
+
+- `Server error`
+
+```json
+{
+    "data": [
+        {
+            "error": true,
+            "message": "Error Please try again later",
+            "status": 500,
+        }
+    ]
+}
+```
+
+
+### 3. Get user Profile
 
 Authenticate a user and retrieve a token.
 
