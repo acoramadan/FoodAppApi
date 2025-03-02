@@ -77,6 +77,19 @@ Class User {
             return false;
         }
     }
+    public function getUserById() {
+        $query = 'SELECT * FROM '.$this->table.' WHERE id = ? LIMIT 1';
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags($this->id));
+        $stmt->bindParam(1, $this->id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    }
     public function setPassword($password) {
         $this->password = $password;
     }
