@@ -1,3 +1,6 @@
+# SIMPLE CRUD API FOR FOODAPP
+This repo its only for my side project that im currently working on. And trying to make an crud API
+
 # API Documentation
 
 This documentation provides a comprehensive guide on how to use the API for user authentication and other related operations.
