@@ -41,7 +41,7 @@ Authenticate a user and retrieve a token.
     "email": "user@gmail.com",
     "password": "password123"
 }
-
+```
 **Success Respons:**
 ```json
 {
@@ -58,6 +58,7 @@ Authenticate a user and retrieve a token.
         }
     ]
 }
+```
 **Failed Respons:**
 ```json
 
@@ -66,7 +67,7 @@ Authenticate a user and retrieve a token.
     "message": "Invalid email or password",
     "status": 400
 }
-
+```
 ### 2. Get user Profile
 
 Authenticate a user and retrieve a token.
@@ -98,28 +99,32 @@ Authenticate a user and retrieve a token.
         }
     ]
 }
-
+```
 **Failed Respons:**
+- `Missing token or invalid token:`
 
-Missing token or invalid token:
+```json
 {
     "error": true,
     "message": "Unauthorized: Invalid or missing token",
     "status": 401
 }
-
-User not Found:
+```
+- `User not Found:`
+```json
 {
     "error": true,
     "message": "User not found",
     "status": 404
 }
-
-Internal server error:
+```
+- `Internal server error:`
+```json
 {
     "error": true,
     "message": "Internal Server Error",
     "status": 500
 }
+```
 
 
