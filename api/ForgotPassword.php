@@ -15,6 +15,7 @@ if(!isset($data->email) || !isset($data->password)) {
             'status' => 404,
         )
     );
+    http_response_code(404);
     return;
 }
 
@@ -26,6 +27,7 @@ if(isEmptyPasswordAndEmail($data->email, $data->password)) {
             'status' => 404,
         )
     );
+    http_response_code(404);
     return;
 }
 
@@ -43,6 +45,7 @@ if($user->updatePasswordByEmail()) {
     );
     array_push($user_arr['data'], $user_item);
     echo json_encode($user_arr);
+    http_response_code(200);
 } else {
     echo json_encode(
         array(
@@ -51,4 +54,5 @@ if($user->updatePasswordByEmail()) {
             'status' => 404,
         )
     );
+    http_response_code(404);
 }

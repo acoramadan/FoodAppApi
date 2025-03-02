@@ -23,7 +23,9 @@ if(!empty($result)) {
     );
     array_push($user_arr['data'], $user_item);
     echo json_encode($user_arr);
+    http_response_code(200);
 } else {
+    http_response_code(404);
     echo json_encode(
         [
             'error' => true,
@@ -31,4 +33,5 @@ if(!empty($result)) {
             'status' => 404
         ]
     );
+    
 }

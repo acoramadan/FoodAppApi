@@ -18,6 +18,7 @@ if(!isset($data->email) || !isset($data->password)) {
             'status' => 404
         )
     );
+    http_response_code(404);
     return;
 }
 
@@ -29,6 +30,7 @@ if (isEmptyPasswordAndEmail($user->getEmail(), $user->getPassword())) {
             'status' => 404
         )
     );
+    http_response_code(404);
     return;
 }
 
@@ -50,4 +52,5 @@ if($user->updatePasswordById()) {
             'status' => 404
         )
     );
+    http_response_code(404);
 }

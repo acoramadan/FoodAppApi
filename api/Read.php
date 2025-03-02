@@ -32,4 +32,5 @@ if($result->rowCount() > 0) {
             'error' => true
             )
     );
+    http_response_code(404);
 }

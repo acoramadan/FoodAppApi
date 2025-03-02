@@ -15,6 +15,7 @@ if(!isset($data->email) || !isset($data->username) || !isset($data->password) ||
             'status' => 404
         )
     );
+    http_response_code(404);
     return;
 }
 
@@ -26,6 +27,7 @@ if(isEmptyRegister($data->email, $data->username, $data->password, $data->phoneN
             'status' => 404
         )
     );
+    http_response_code(404);
     return;
 }
 $user->setEmail($data->email);
@@ -51,4 +53,5 @@ if ($user->createUser()) {
             'status' => 404
         )
     );
+    http_response_code(404);
 }
